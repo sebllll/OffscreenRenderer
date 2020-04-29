@@ -12,7 +12,7 @@ Hierarchy:
         - ref!! 67ab7ec5-8695-4c02-8eb7-c7b7050c53d2
         - ref!! 0b1b8789-3184-486e-b476-d0a27b926d06
         - ref!! fcdcfe5e-d525-4f26-af36-1213f141c74e
-        - ref!! d2707191-8dc1-48fb-86b5-e0beeb2cc78a
+        - ref!! 16461fc8-0a5a-47c6-a9a3-f6978bba3b30
     Parts:
         -   Entity:
                 Id: 0b1b8789-3184-486e-b476-d0a27b926d06
@@ -46,13 +46,25 @@ Hierarchy:
                         Type: !LightSkybox
                             Skybox: 706efeb3-a605-44cd-aa6d-56459f7731bf:Skybox
         -   Entity:
+                Id: 16461fc8-0a5a-47c6-a9a3-f6978bba3b30
+                Name: OffscreenScenesystem
+                Components:
+                    d20e2c0fefff28be6563805e3f265b55: !TransformComponent
+                        Id: 8e61625c-3d2b-4c9f-8458-46226b75286d
+                        Position: {X: 0.0, Y: 0.0, Z: 0.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
+                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
+                        Children: {}
+                    f563e04d9098ee6c524e98eefe2aff32: !OffscreenRenderer.OffscreenScenesystem,OffscreenRenderer
+                        Id: 470f360b-4ac2-42c1-8761-0ff21fad78f5
+        -   Entity:
                 Id: 632de489-4927-46a7-870b-322230bf3ccf
-                Name: Camera
+                Name: MainCamera
                 Components:
                     4e4cbb6bb931a51eccd06656b5be2af4: !TransformComponent
                         Id: 0688ed9f-3638-4e0d-8754-eafef8942935
-                        Position: {X: 2.6, Y: 0.6, Z: -0.942408442}
-                        Rotation: {X: 0.0, Y: 0.829037547, Z: 0.0, W: 0.5591929}
+                        Position: {X: 0.0, Y: 1.0, Z: 4.0}
+                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     4ab78f312468d336e4adf821c2a12518: !CameraComponent
@@ -90,7 +102,7 @@ Hierarchy:
                     3caeb5e6c333247ef7d93061e25ba79b: !TransformComponent
                         Id: c64c3655-c074-42e9-b2db-ad6384206623
                         Position: {X: 0.0, Y: 2.0, Z: 0.0}
-                        Rotation: {X: 1.131334E-08, Y: -0.9659258, Z: -0.258819044, W: -4.222196E-08}
+                        Rotation: {X: -2.8707376E-08, Y: -0.32470423, Z: -0.945815563, W: -3.29631931E-08}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     589f66111192d9155ad4c5a709febe94: !LightComponent
@@ -109,28 +121,17 @@ Hierarchy:
                                 BiasParameters: {}
                         Intensity: 20.0
         -   Entity:
-                Id: d2707191-8dc1-48fb-86b5-e0beeb2cc78a
-                Name: OffscreenScenesystem
-                Components:
-                    60bb8b4829937c2953de64ceb8fa1494: !TransformComponent
-                        Id: 2fab6d8f-0953-429c-a1fa-b3f9e97b28b3
-                        Position: {X: 2.39273334, Y: 1.66392469, Z: 0.0}
-                        Rotation: {X: 0.0, Y: 0.0, Z: 0.0, W: 1.0}
-                        Scale: {X: 1.0, Y: 1.0, Z: 1.0}
-                        Children: {}
-                    0af87912dd70a3c161aa9c1318636a9a: !OffscreenRenderer.OffscreenScenesystem,OffscreenRenderer
-                        Id: adca24d2-999e-4e0b-8d79-99140077c858
-        -   Entity:
                 Id: fcdcfe5e-d525-4f26-af36-1213f141c74e
                 Name: Plane
                 Components:
                     1b4bd0cc93c2ae89d5d3e0c697803f77: !TransformComponent
                         Id: 2778954f-b691-4e82-9333-8e9f96d55935
-                        Position: {X: -2.71121788, Y: 0.707948744, Z: -0.995858252}
-                        Rotation: {X: 0.0, Y: 0.0, Z: -0.707106769, W: 0.707106769}
+                        Position: {X: -1.89504313, Y: 1.0, Z: 0.0}
+                        Rotation: {X: 0.49999997, Y: -0.5, Z: -0.49999997, W: 0.5}
                         Scale: {X: 1.0, Y: 1.0, Z: 1.0}
                         Children: {}
                     f6af78c31dc3e9f7467fb1269a1882b5: !ModelComponent
                         Id: 2f546c0e-fc10-4a0f-9d25-62469eb7320e
                         Model: 0ac9be56-67bc-4dce-8a7a-08bb62d7a31a:Plane
-                        Materials: {}
+                        Materials:
+                            dc44eb18c15c3a4719656870fa1800d7~0: c1eb9966-51ed-4223-9e2c-eba87c74966d:OffscreenMaterial

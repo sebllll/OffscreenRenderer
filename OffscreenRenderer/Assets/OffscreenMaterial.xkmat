@@ -12,16 +12,11 @@ Attributes:
             Offset: {X: 0.0, Y: 0.0}
             Swizzle: null
     DiffuseModel: !MaterialDiffuseLambertModelFeature {}
-    Emissive: !MaterialEmissiveMapFeature
-        EmissiveMap: !ComputeTextureColor
-            Texture: 5efde3d9-cbcf-4f0d-a938-932aa085b2a7:RenderTexture
-            FallbackValue:
-                Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
-            Scale: {X: 1.0, Y: 1.0}
-            Offset: {X: 0.0, Y: 0.0}
-            Swizzle: null
-        Intensity: !ComputeFloat
+    Transparency: !MaterialTransparencyBlendFeature
+        Alpha: !ComputeFloat
             Value: 1.0
+        Tint: !ComputeColor
+            Value: {R: 1.0, G: 1.0, B: 1.0, A: 1.0}
     Overrides:
         UVScale: {X: 1.0, Y: 1.0}
 Layers: {}

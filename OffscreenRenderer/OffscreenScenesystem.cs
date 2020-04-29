@@ -8,14 +8,15 @@ using Xenko.Input;
 using Xenko.Engine;
 using Xenko.Rendering;
 using Xenko.Rendering.Lights;
+using Xenko.Rendering.Skyboxes;
 using Xenko.Rendering.Colors;
 using Xenko.Rendering.Compositing;
+using Xenko.Graphics;
 
 namespace OffscreenRenderer
 {
     public class OffscreenScenesystem : SyncScript
     {
-
         public override void Start()
         {
             var scene = new Scene();
@@ -41,58 +42,84 @@ namespace OffscreenRenderer
             camEntity.Add(camComponent);
             scene.Entities.Add(camEntity);
 
+            // transform cam pos
+            camEntity.Transform.Position = new Vector3(0.0f, 0.0f, 5.0f);
+            var angle = (float)Math.PI / -2;
+            camEntity.Transform.Rotation = Quaternion.RotationZ(angle);
+
             //Assign camera to CameraSlot
             camComponent.Slot = sceneSystem.GraphicsCompositor.Cameras.FirstOrDefault().ToSlotId();
-
-            
-
 
             // add scenesystem to Game, so it gets called
             Game.GameSystems.Add(sceneSystem);
         }
 
+        private Entity dirlight;
 
         private void AddSceneContent(Scene scene)
         {
-            // Create Capsule
+            // Capsule
             var capsule = new Entity();
-
-            // Add a model included in the game files.
             var modelComponent = capsule.GetOrCreate<ModelComponent>();
             modelComponent.Model = Content.Load<Model>("Capsule");
 
-            //Create Light
+            // Ambient Light
             var amblight = new Entity();
 
-            var lightCol = new Color3(1.0f);
+            var lightCol = new Color3(1.0f, 0.0f, 0.0f);
 
             var lc = new LightComponent
             {
                 Type = new LightAmbient { Color = new ColorRgbProvider(lightCol) },
-                Intensity = 500.0f
+                Intensity = 0.2f
             };
             amblight.Add(lc);
+
+            // Directional Light
+            dirlight = new Entity();
+
+            var dlc = new LightComponent
+            {
+                Type = new LightDirectional { Color = new ColorRgbProvider(new Color3(09.7f))},
+                Intensity = 0.01f
+            };
+            dirlight.Add(dlc);
+
+            // Sky Light 
+            var skylight = new Entity();
+            var skybox = Content.Load<Skybox>("Skybox");
+            var slc = new LightComponent
+            {
+                Type = new LightSkybox { Skybox = skybox},
+                Intensity = 0.02f
+            };
+
+            // Background
+            ////var bgTexture = Content.Load<Texture>("Skybox texture");
+            ////var bgc = new BackgroundComponent
+            ////{
+            ////    Texture = bgTexture,
+            ////    Intensity = 1.0f
+            ////};
+            //skylight.Add(bgc);
+
+
+            skylight.Add(slc);
+
 
             // add Entities to Scene
             scene.Entities.Add(capsule);
             scene.Entities.Add(amblight);
+            scene.Entities.Add(dirlight);
+            scene.Entities.Add(skylight);
         }
 
         public override void Update()
         {
-            var myscene = (SceneSystem)Game.GameSystems.Where(system => system.Name == "OffscreeScenesystem").FirstOrDefault();
+            var deltaTime = (float)Game.UpdateTime.Elapsed.TotalSeconds;
 
-            //myscene.Update(Game.UpdateTime);
-            //myscene.Draw(Game.UpdateTime);
+            dirlight.Transform.Rotation *= Quaternion.RotationYawPitchRoll(0.8f * deltaTime, 0.3f * deltaTime, 0.6f * deltaTime);
 
-            //myscene.SceneInstance.Update(Game.UpdateTime);
-            //myscene.Draw();
-
-            //if (myscene.GraphicsCompositor.Cameras.FirstOrDefault().Camera == null)
-            //{
-            //    var camComponent = new CameraComponent();
-            //    camComponent.Slot = myscene.GraphicsCompositor.Cameras.FirstOrDefault().ToSlotId();
-            //}
         }
     }
 }
