@@ -20,14 +20,12 @@ namespace OffscreenRenderer
     {
 
         /// <summary>
-        /// Creates a graphics compositor programatically that renders into a Rendertarget. It can render meshes, sprites and backgrounds.
+        /// Creates a graphics compositor programatically that renders into a Rendertarget. It can render everything the default Compositor can 
         /// </summary>
         public static GraphicsCompositor CreateOffscreenCompositor(
             bool enablePostEffects,
             Texture renderTarget,
-            //string modelEffectName = "XenkoForwardShadingEffect",
             CameraComponent camera = null,
-            //GraphicsProfile graphicsProfile = GraphicsProfile.Level_10_0,
             RenderGroupMask groupMask = RenderGroupMask.All)
         {
             #region Render stages
@@ -112,7 +110,8 @@ namespace OffscreenRenderer
                     {
                         EffectName = "Test", // TODO: Check this
                         OpaqueRenderStage = opaqueRenderStage,
-                        TransparentRenderStage = transparentRenderStage
+                        TransparentRenderStage = transparentRenderStage,
+                        RenderGroup = groupMask
                     }
                 }
             };
@@ -124,7 +123,8 @@ namespace OffscreenRenderer
                     new SimpleGroupToRenderStageSelector()
                     {
                         EffectName = "Test",
-                        RenderStage = opaqueRenderStage
+                        RenderStage = opaqueRenderStage,
+                        RenderGroup = groupMask
                     }
                 }
             };
@@ -136,7 +136,8 @@ namespace OffscreenRenderer
                     new SimpleGroupToRenderStageSelector()
                     {
                         EffectName = "Test",
-                        RenderStage = transparentRenderStage
+                        RenderStage = transparentRenderStage,
+                        RenderGroup = groupMask
                     }
                 }
             };
@@ -148,7 +149,8 @@ namespace OffscreenRenderer
                     new ParticleEmitterTransparentRenderStageSelector()
                     {
                         OpaqueRenderStage = opaqueRenderStage,
-                        TransparentRenderStage = transparentRenderStage
+                        TransparentRenderStage = transparentRenderStage,
+                        RenderGroup = groupMask
                     }
                 }
             };
@@ -171,7 +173,7 @@ namespace OffscreenRenderer
             #region Camera slots
             var offscreenCameraSlot = new SceneCameraSlot();
             if (camera != null)
-                camera.Slot = offscreenCameraSlot.ToSlotId(); //TODO: hand over camera to constructor and use that one here?
+                camera.Slot = offscreenCameraSlot.ToSlotId();
             #endregion
 
             #region post fx
