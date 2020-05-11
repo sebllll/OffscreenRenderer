@@ -15,5 +15,5 @@ ExplicitFolders: []
 Bundles: []
 TemplateFolders: []
 RootAssets:
-    - 775c2143-73bc-4f3a-aea0-d3b5149fed9d:OffscreenCompositor
+    - 5efde3d9-cbcf-4f0d-a938-932aa085b2a7:RenderTexture
     - a6ca0c15-14eb-4cc6-90ed-7511c64da8ba:Capsule

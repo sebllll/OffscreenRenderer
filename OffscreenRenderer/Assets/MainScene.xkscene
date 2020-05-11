@@ -122,7 +122,7 @@ Hierarchy:
                         Intensity: 20.0
         -   Entity:
                 Id: fcdcfe5e-d525-4f26-af36-1213f141c74e
-                Name: Plane
+                Name: OffscreenView
                 Components:
                     1b4bd0cc93c2ae89d5d3e0c697803f77: !TransformComponent
                         Id: 2778954f-b691-4e82-9333-8e9f96d55935
@@ -132,6 +132,6 @@ Hierarchy:
                         Children: {}
                     f6af78c31dc3e9f7467fb1269a1882b5: !ModelComponent
                         Id: 2f546c0e-fc10-4a0f-9d25-62469eb7320e
-                        Model: 0ac9be56-67bc-4dce-8a7a-08bb62d7a31a:Plane
+                        Model: 0ac9be56-67bc-4dce-8a7a-08bb62d7a31a:OffscreenView
                         Materials:
                             dc44eb18c15c3a4719656870fa1800d7~0: c1eb9966-51ed-4223-9e2c-eba87c74966d:OffscreenMaterial

@@ -23,19 +23,6 @@ namespace OffscreenRenderer
 
             AddSceneContent(scene);
 
-            // Create SCenesystem
-            var sceneSystem = new SceneSystem(Services)
-            {
-                SceneInstance = new SceneInstance(Services, scene)
-            };
-            sceneSystem.Name = "OffscreeScenesystem";
-
-            // OffscreenCompositor
-            var offscreencompositor = Content.Load<GraphicsCompositor>("OffscreenCompositor");
-            offscreencompositor.Name = "OffscreenCompositor";
-
-            sceneSystem.GraphicsCompositor = offscreencompositor;
-
             // add Camera
             var camEntity = new Entity();
             var camComponent = new CameraComponent();
@@ -47,8 +34,19 @@ namespace OffscreenRenderer
             var angle = (float)Math.PI / -2;
             camEntity.Transform.Rotation = Quaternion.RotationZ(angle);
 
-            //Assign camera to CameraSlot
-            camComponent.Slot = sceneSystem.GraphicsCompositor.Cameras.FirstOrDefault().ToSlotId();
+
+            // Create Scenesystem
+            var sceneSystem = new SceneSystem(Services)
+            {
+                SceneInstance = new SceneInstance(Services, scene)
+            };
+            sceneSystem.Name = "OffscreeScenesystem";
+
+            var renderTargetloaded = Content.Load<Texture>("RenderTexture");
+            //var renderTarget = Helpers.CreateRenderTarget(Game.GraphicsDevice, PixelFormat.R8G8B8A8_UNorm_SRgb, 1024, 1024); // works also, but this is not set in GS's Material
+            var offscreencompositorFromCode = Helpers.CreateOffscreenCompositor(false, renderTargetloaded, camComponent);
+
+            sceneSystem.GraphicsCompositor = offscreencompositorFromCode;
 
             // add scenesystem to Game, so it gets called
             Game.GameSystems.Add(sceneSystem);
